@@ -1,11 +1,3 @@
-/*
-project: 01
-author: Sofia Gomes
-email: sgomes2@umbc.edu
-student id: UG75857
-description: a simple linux shell designed to perform basic linux commands
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,14 +5,6 @@ description: a simple linux shell designed to perform basic linux commands
 #include <sys/wait.h>
 #include <ctype.h>
 #include "utils.h"
-
-/*
-In this project, you are going to implement a number of functions to 
-create a simple linux shell interface to perform basic linux commands
-*/
-
-// exit command has error code for exit() function
-// ^ in readme specifcy
 
 // prompts user for input then executes commands in a loop until user wishes to exit
 void user_prompt_loop();
@@ -35,13 +19,6 @@ void execute_command(const char *File, char *const ArgumentVector[], char* messa
 
 
 int main(int argc, char **argv){
-    /*
-    Write the main function that checks the number of argument passed to ensure 
-    no command-line arguments are passed; if the number of argument is greater 
-    than 1 then exit the shell with a message to stderr and return value of 1
-    otherwise call the user_prompt_loop() function to get user input repeatedly 
-    until the user enters the "exit" command.
-    */
    (void)argv;
     if (argc > 1){
     	fprintf(stderr, "Unknown argument\n");
@@ -53,54 +30,7 @@ int main(int argc, char **argv){
 }
 
 
-/*
-Get the user input using a loop until the user exits, prompting the user for a command.
-Gets command and sends it to a parser, then compares the first element to the two
-different commands ("/proc", and "exit"). If it's none of the commands, 
-send it to the execute_command() function. If the user decides to exit, then exit 0 or exit 
-with the user given value. 
-*/
-void user_prompt_loop(){/*user_prompt_loop()*/
-    // initialize variables
-
-    /*
-    loop:
-        1. prompt the user to type command by printing >>
-        2. get the user input using get_user_command() function 
-        3. parse the user input using parse_command() function 
-        Example: 
-            user input: "ls -la"
-            parsed output: ["ls", "-la", NULL]
-        4. compare the first element of the parsed output to "/proc"and "exit"
-        5. if the first element is "/proc" then you have the open the /proc file system 
-           to read from it
-            i) concat the full command:
-                Ex: user input >>/proc /process_id_no/status
-                    concated output: /proc/process_id_no/status
-            ii) read from the file line by line. you may user fopen() and getline() functions
-            iii) display the following information according to the user input from /proc
-                a) Get the cpu information if the input is /proc/cpuinfo
-                - Cpu Mhz
-                - Cache size
-                - Cpu cores
-                - Address sizes
-                b) Get the number of currently running processes from /proc/loadavg
-                c) Get how many seconds your box has been up, and how many seconds it has been idle from /proc/uptime
-                d) Get the following information from /proc/process_id_no/status
-                - the vm size of the virtual memory allocated the vbox 
-                - the most memory used vmpeak 
-                - the process state
-                - the parent pid
-                - the number of threads
-                - number of voluntary context switches
-                - number of involuntary context switches
-                e) display the list of environment variables from /proc/process_id_no/environ
-                f) display the performance information if the user input is /proc/process_id_no/sched
-        6. if the first element is "exit" the use the exit() function to terminate the program
-        7. otherwise pass the parsed command to execute_command() function 
-        8. free the allocated memory using the free() function
-    */
-
+void user_prompt_loop(){
    // variable which will be used to store user input
     char *message;
 
@@ -112,9 +42,7 @@ void user_prompt_loop(){/*user_prompt_loop()*/
     filepath[strlen(home_dir)] = '/';
     filepath[strlen(home_dir) + 1] = '\0';
     strcat(filepath, filename);
-
-    // prompting user for first time. i could have just added this in my while loop but i started this
-    // project early so I was experimenting. rather not change it, i apologize
+    
     printf(">> ");
     message = get_user_command();
     int return_code = parse_command(message, filepath);
@@ -153,11 +81,6 @@ void user_prompt_loop(){/*user_prompt_loop()*/
     free(message);
 }
 
-
-/*
-Take input of arbitrary size from the user and return to the user_prompt_loop()
-*/
-
 char * get_user_command(){
     // creating a buffer for tracking and also keeping track of the position
     int buffer = 256;
@@ -192,17 +115,6 @@ char * get_user_command(){
     // return string
     return message;
 }
-
-/*
-parse_command():
-Take command grabbed from the user and parse appropriately.
-Example: 
-    user input: "ls -la"
-    parsed output: ["ls", "-la", NULL]
-Example: 
-    user input: "echo     hello                     world  "
-    parsed output: ["echo", "hello", "world", NULL]
-*/
 
 int parse_command(char * message, char filepath[]){
 
@@ -430,19 +342,11 @@ int parse_command(char * message, char filepath[]){
             free(copy);
         }
     }else{
-        // idk if i should remove this but im keeping it, just in case
         free(copy);
         return 0; 
     }
     return 1;   
 }
-
-
-/*
-execute_command():
-Execute the parsed command if the commands are neither /proc nor exit;
-fork a process and execute the parsed command inside the child process
-*/
 
 void execute_command(const char *File, char *const ArgumentVector[], char* message, int length, char** array, char* copy){
    // creating a child process
@@ -451,8 +355,6 @@ void execute_command(const char *File, char *const ArgumentVector[], char* messa
 
     // checking if child process has successfully been created
     if(pid == 0){
-        // calling execvp() on command, I think I kept flag here because I was getting an error without it. i am
-        // too scared to remove it lol
         execvp(File, ArgumentVector);
 
         // if there has been an error (if the command didn't exist etc), I exit the child process and free my variables
