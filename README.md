@@ -1,31 +1,11 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ZhE-zmlt)
-# Project 1
-Answer these questions please:
-
 Project Overview:
 -----------------------------------
 What is the project about? Provide a brief overview that includes the project's name, purpose, and target audience.
 
 *The objective of this project was to implement a "simple" shell. This shell would be able to exit, read from /proc filesystems, and perform basic Lunux commands such as ls, echo, ps, and you can even run valgrind [or your program] as well. The target audience would be users who are familiar with Linux as they will understand the output of these commands as well as which commands to input.*
 
-Solution Approach:
-------------------------------------------------------------
-
-How did you approach the problem? Outline the steps or phases in your project development process?
-
-*I did research of my own before joining Office Hours. I would only join Office Hours if I was completely confused. Even in Office Hours, they would suggest I look up documentation. So the big reason why I was able to understand these concepts and how to use them was because I read documentation and saw a few examples. When I work on projects, I try to break it down based on steps/functions. My first step was to check for any arguments passed into my program. My second step was to create the while loop to prompt the user until they type 'exit' or 'exit [parameter']. Throughout all of this, I would test with valgrind to avoid memory leaks and errors. I implemented exit so that it runs properly, then moved on to reading '/proc' filesystems. I made sure to take care of any edge cases. And finally, I implemented execvp() to emulate commands from the user's terminal, while saving all of those commands in a hidden file.*
-
-Challenges and Solutions?
----------------------------
-What challenges did you encounter while completeing your project, and how did you overcome them?
-
-*I faced many challenges from this project. There were so many functions I was unfamiliar with, so through my own research as well as help from Office Hours I was able to look up documentation from certain functions and see examples to understand how to fit that into my program. For example, I was not sure how to copy a dynamically allocated string, but doing my research helped with that. I also did not understand how to print /proc filesystems files. I also had to do research on how to create (write, add, read) from a file so I refreshed my knowledge on that. Learning how execvp() works was something entirely new from me, but there are many amazing examples which helped me understand.*
-
-
-LLM Disclosure
+Helpful Sources
 --------------
-Are there any external resources or references that might be helpful?
-
 *I have attached these links which I used to help me with this project:* <br>
 https://www.geeksforgeeks.org/strcmp-in-c/ <br>
 https://www.scaler.com/topics/exit-function-in-c/ <br>
@@ -38,19 +18,8 @@ https://www.geeksforgeeks.org/strcat-in-c/ <br>
 https://www.educative.io/answers/what-is-the-execvp-function-in-c <br>
 https://www.guru99.com/c-file-input-output.html <br>
 
-
-Testing and Validation
------------------------
-Testing Methodology: How did you test your project? Discuss any unit tests, integration tests, or user acceptance testing conducted.
-Are there any specific commands or scripts that should be known?
-
-*I used many testing prompts given by students in the CMSC421 Discord Channel. I also used the examples listed in the CMSC421 Project 1 Document. I used the exit command by testing 'exit', 'exit [string]', 'exit [positive int]', and 'exit [negative int]'. I tested /proc filesystem commands with '/proc     [command]', '/proc   /[command]/, '/proc     [pid]/[command]', and '/proc/[pid]/[command]'. With execvp() commands, I used different variations of 'echo', 'ls', 'ps', and I even ran my program in the child process.*
-
-
 Example session
 ---------------
-Provide examples on running your project
-
 *Session 1:* <br>
 ./main_template 22 <br>
 Unknown argument <br>
