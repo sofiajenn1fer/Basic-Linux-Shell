@@ -1,7 +1,5 @@
 Project Overview:
 -----------------------------------
-What is the project about? Provide a brief overview that includes the project's name, purpose, and target audience.
-
 *The objective of this project was to implement a "simple" shell. This shell would be able to exit, read from /proc filesystems, and perform basic Lunux commands such as ls, echo, ps, and you can even run valgrind [or your program] as well. The target audience would be users who are familiar with Linux as they will understand the output of these commands as well as which commands to input.*
 
 Helpful Sources
